@@ -35,8 +35,14 @@ const RegisterForm: React.FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Registering:', formData);
-    if (auth_hint.current){
-        auth_hint.current.textContent = "you are not an authenticated user yet";
+    //prevent unvalid data check
+    if ((touchedEmail && formData.email && !isValidEmail(formData.email)
+       ||touchedPassword && formData.password && !isValidPassword(formData.password))
+       && auth_hint.current){
+      auth_hint.current.textContent = "unvalid email or password, please retry";
+      console.log('email or password not in the right format')
+    }else if(auth_hint.current){
+      auth_hint.current.textContent = "you are not an authenticated user yet";
         console.log('Registering failed: not an authenticated user');
     }
   };

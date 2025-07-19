@@ -17,6 +17,9 @@ const SignInForm: React.FC = () => {
   const [touchedPassword, setTouchedPassword] = useState(false);
   const auth_hint = useRef<HTMLParagraphElement>(null);
 
+  // set match
+
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -35,8 +38,14 @@ const SignInForm: React.FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Registering:', formData);
-    if (auth_hint.current){
+    if ((touchedEmail && formData.email && !isValidEmail(formData.email)
+       ||touchedPassword && formData.password && !isValidPassword(formData.password))
+       && auth_hint.current){
+      auth_hint.current.textContent = "unvalid email or password, please retry";
+      console.log('email or password not in the right form')
+    }else if(auth_hint.current){
         auth_hint.current.textContent = "there's no account under this email, please register";
+        console.log(touchedEmail,touchedPassword);
         console.log('Login failed: not an user');
     }
   };
