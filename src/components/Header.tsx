@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <Home className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">GTA Homes</span>
+            <span className="text-2xl font-bold text-gray-900">Union Homes</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -33,10 +33,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
               Rent
             </a>
             <a href="#sell" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-              Sell
+              Agent
             </a>
             <a href="#agents" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-              Agents
+              Contact
             </a>
           </nav>
 
@@ -59,10 +59,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
             </div>
           </form>
 
-          {/* Contact Button */}
+          {/* Sign In Button */}
           <div className="hidden md:flex items-center space-x-4">
             <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              Contact Us
+              Sign In
             </button>
           </div>
 

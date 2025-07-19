@@ -13,6 +13,8 @@ import { properties } from './data/properties';
 import { usePropertyFilters } from './hooks/usePropertyFilters';
 import { useSavedProperties } from './hooks/useSavedProperties';
 import { Property } from './types/Property';
+import RegisterForm from './components/form/RegisterForm';
+import SignInForm from './components/form/SignInForm';
 
 function App() {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
@@ -46,6 +48,9 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header onSearch={handleSearch} />
+
+      <RegisterForm/>
+      <SignInForm/>
       
       <Hero onFiltersChange={updateFilters} />
       
