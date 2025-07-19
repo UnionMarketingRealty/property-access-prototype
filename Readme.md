@@ -102,32 +102,12 @@ npx json-server --watch db.json --port 4000
 - prevent search engines from indexing property data
 
 ## 📦 Build for Production
-bash
-Copy
-Edit
+```bash
 npm run build
-The optimized static files will be output to the dist/ folder.
+```
 
-📄 License
+The optimized static files will be output to the `dist/` folder.
+
+## 📄 License
 This project is for demo purposes only. All rights reserved © Union Marketing.
 
-🙋‍♂️ Contact
-Built with ❤️ by [Your Name] for Union Marketing
-[Your Email or LinkedIn]
-
-yaml
-Copy
-Edit
-
----
-
-Let me know if you want to include screenshots, deployment instructions (e.g. Netlify or Vercel), or a live demo link!
-
-
-
-
-
-
-
-
-Ask ChatGPT
