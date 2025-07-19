@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
 
 interface FormData {
   name: string;
@@ -6,7 +6,7 @@ interface FormData {
   password: string;
 }
 
-const RegisterForm: React.FC = () => {
+const SignInForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -14,6 +14,8 @@ const RegisterForm: React.FC = () => {
   });
 
   const [touchedEmail, setTouchedEmail] = useState(false);
+  const [touchedPassword, setTouchedPassword] = useState(false);
+  const auth_hint = useRef<HTMLParagraphElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,22 +27,37 @@ const RegisterForm: React.FC = () => {
     if (name === 'email') {
       setTouchedEmail(true);
     }
+    if (name === 'password'){
+      setTouchedPassword(true);
+    } 
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Registering:', formData);
+    if (auth_hint.current){
+        auth_hint.current.textContent = "there's no account under this email, please register";
+        console.log('Login failed: not an user');
+    }
   };
 
   const isValidEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const isValidPassword = (password: string) =>
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/.test(password);
+
 
   return (
     <form
       onSubmit={handleSubmit}
       className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md"
     >
-      <h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
+      <h2 className="text-2xl font-semibold text-center mb-6">Sign In</h2>
+      <p 
+        ref={auth_hint}
+        className="text-center text-sm text-red-600 mt-1"> 
+        {''}</p>
 
       {/* Name Field */}
       <label htmlFor="name" className="block font-medium mb-1">
@@ -94,19 +111,37 @@ const RegisterForm: React.FC = () => {
         required
         value={formData.password}
         onChange={handleChange}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className={`w-full px-4 py-2 border ${
+          !isValidPassword(formData.password) && touchedPassword
+            ? 'border-red-500'
+            : 'border-gray-300'
+        } rounded-lg focus:outline-none focus:ring-2 ${
+          !isValidPassword(formData.password) && touchedPassword
+            ? 'focus:ring-red-500'
+            : 'focus:ring-blue-500'
+        }`}
       />
+      {touchedPassword && formData.password && !isValidPassword(formData.password) && (
+        <p className="text-sm text-red-600 mt-1">
+          Password must be at least 8 characters long and include a letter, a number, and a special character.
+        </p>
+      )}
 
       {/* Submit */}
       <button
         type="submit"
         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300"
       >
-        Register
+        Sign In
       </button>
+
+      <a href='/sign-in'>
+        <p className="mt-5 text-center text-sm underline font-medium text-gray-400 hover:text-sky-700 cursor-pointer">
+            Don't Have an Account? Register Here --&gt;</p>
+      </a>
     </form>
   );
 };
 
-export default RegisterForm;
+export default SignInForm;
 
