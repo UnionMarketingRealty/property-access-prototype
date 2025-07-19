@@ -68,24 +68,24 @@ to be added and updated
 ## 🛠️ Running Locally
 1. Clone the repo
 ```bash
-git clone https://github.com/your-username/union-marketing-demo.git
-cd union-marketing-demo
+git clone https://github.com/UnionMarketingRealty/property-access-prototype.git
+cd property-access-prototype
 ```
 2. Install dependencies
 ```bash
 npm install
 ```
-3. Set up environment variables (optional)
-```bash
-cp .env.example .env
-```
+3. Set up environment variables 
+(to be done, no .env yet)
+
+
 4. Run the development server
 ```bash
 npm run dev
 ```
 Visit http://localhost:5173 in your browser.
 
-5. (Optional) Mock API backend
+5. (Todo) Mock API backend
 We're using json-server to mock property data:
 
 ```bash
