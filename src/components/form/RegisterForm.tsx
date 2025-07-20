@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
 
+import api from '../../api/axios';
+
 interface FormData {
   name: string;
   email: string;
@@ -73,7 +75,7 @@ const RegisterForm: React.FC = () => {
       <input
         type="text"
         name="name"
-        id="name"
+        id="register-name"
         required
         value={formData.name}
         onChange={handleChange}
@@ -87,7 +89,7 @@ const RegisterForm: React.FC = () => {
       <input
         type="email"
         name="email"
-        id="email"
+        id="register-email"
         required
         value={formData.email}
         onChange={handleChange}
@@ -114,7 +116,7 @@ const RegisterForm: React.FC = () => {
       <input
         type="password"
         name="password"
-        id="password"
+        id="register-password"
         required
         value={formData.password}
         onChange={handleChange}

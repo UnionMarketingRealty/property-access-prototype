@@ -1,26 +1,21 @@
-import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useRef, useEffect } from 'react';
 
 import api from '../../api/axios';
 
 interface FormData {
-  name: string;
   email: string;
   password: string;
 }
 
-type LoginResponse = {
-  token: string;
-  user: {
-    name: string;
-    email: string;
-    password: string;
-  };
+type User = {
+  id: number;
+  name:string;
+  email: string;
+  password: string;
 };
-
 
 const SignInForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
     email: '',
     password: '',
   });
@@ -30,9 +25,22 @@ const SignInForm: React.FC = () => {
   const [touchedPassword, setTouchedPassword] = useState(false);
   const auth_hint = useRef<HTMLParagraphElement>(null);
 
-  // TODO - pw, email, username match
+  // TODO - pw, email, username match users in db
   const [success,setSuccess] = useState(false);
 
+  //fetch data from json-server users
+  /*const [users,setUsers] = useState(null);
+  useEffect(()=>{
+    fetch(`http://localhost:8000/users`)
+    .then(res =>{
+      return res.json();
+    })
+    .then((data)=>{
+      setUsers(data);
+      console.log(`fetched user data from server`);
+      console.log(data);
+    })
+  },[]);*/
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -57,30 +65,27 @@ const SignInForm: React.FC = () => {
        && auth_hint.current){
       setSuccess(false);
       auth_hint.current.textContent = "unvalid email or password, please retry";
-      console.log('email or password not in the right form')
-    }else if(auth_hint.current ){
+    }else if(auth_hint.current){
       //check if is a user, todo
-      setSuccess(false);
-      auth_hint.current.textContent = "there's no account under this email, please register";
-      console.log(touchedEmail,touchedPassword,`valid input format`);
-      console.log('Login failed: not an user');
-    }else{
-      //is a user, login sucess
-      alert('✅ we went else');
-      {/*try{
-        const res = await api.get(LOGIN_URL, {
-          params: {
-            name:'Shirong Tang',
-            email: 'test@example.com',
-            password: '123456'}
-        });
-        if (res.data.length > 0) {
-          alert('✅ Login success');
+      console.log(formData.email,formData.password);
+      console.log(`http://localhost:8000/users?email=${formData.email}&password=${formData.password}`);
+      try {
+        const response = await fetch(
+          `http://localhost:8000/users?email=${formData.email}&password=${formData.password}`
+        )
+        const data: User[] = await response.json();
+        console.log(data);
+        console.log(data.length);
+
+        if (data.length > 0) {
+          auth_hint.current.textContent =`Welcome, ${data[0].name}!`;
+          setSuccess(true);
         } else {
-          alert('❌ Invalid credentials');}
-      console.log('Registering:', formData);
-      }catch(err){
-      }*/}
+          auth_hint.current.textContent ='Invalid username or password.';
+        }
+      } catch (err) {
+        console.log('error catched!');
+      }
     }
   };
 
@@ -116,20 +121,6 @@ const SignInForm: React.FC = () => {
         ref={auth_hint}
         className="text-center text-sm text-red-600 mt-1"> 
         {''}</p>
-
-      {/* Name Field */}
-      <label htmlFor="name" className="block font-medium mb-1">
-        Name
-      </label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        required
-        value={formData.name}
-        onChange={handleChange}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
 
       {/* Email Field */}
       <label htmlFor="email" className="block mt-4 font-medium mb-1">
