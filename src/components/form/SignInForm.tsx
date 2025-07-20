@@ -17,6 +17,10 @@ const SignInForm: React.FC = () => {
   const [touchedPassword, setTouchedPassword] = useState(false);
   const auth_hint = useRef<HTMLParagraphElement>(null);
 
+  // TODO - pw, email, username match
+  const [success,setSuccess] = useState(false);
+
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -34,10 +38,24 @@ const SignInForm: React.FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Registering:', formData);
-    if (auth_hint.current){
-        auth_hint.current.textContent = "there's no account under this email, please register";
-        console.log('Login failed: not an user');
+    //prevent unvalid data check
+    if ((touchedEmail && formData.email && !isValidEmail(formData.email)
+       ||touchedPassword && formData.password && !isValidPassword(formData.password))
+       && auth_hint.current){
+      setSuccess(false);
+      auth_hint.current.textContent = "unvalid email or password, please retry";
+      console.log('email or password not in the right form')
+    }else if(auth_hint.current){
+      //check if is a user, todo
+      setSuccess(false);
+      auth_hint.current.textContent = "there's no account under this email, please register";
+      console.log(touchedEmail,touchedPassword);
+      console.log('Login failed: not an user');
+    }else{
+      //is a user, login sucess
+      setSuccess(true);
+      console.log('Login success');
+      console.log('Registering:', formData);
     }
   };
 
@@ -135,7 +153,7 @@ const SignInForm: React.FC = () => {
         Sign In
       </button>
 
-      <a href='/sign-in'>
+      <a href='#register'>
         <p className="mt-5 text-center text-sm underline font-medium text-gray-400 hover:text-sky-700 cursor-pointer">
             Don't Have an Account? Register Here --&gt;</p>
       </a>
