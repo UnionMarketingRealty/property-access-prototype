@@ -1,14 +1,19 @@
-import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useRef, useEffect } from 'react';
 
 interface FormData {
-  name: string;
   email: string;
   password: string;
 }
 
+type User = {
+  id: number;
+  name:string;
+  email: string;
+  password: string;
+};
+
 const SignInForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
     email: '',
     password: '',
   });
@@ -16,10 +21,33 @@ const SignInForm: React.FC = () => {
   const [touchedEmail, setTouchedEmail] = useState(false);
   const [touchedPassword, setTouchedPassword] = useState(false);
   const auth_hint = useRef<HTMLParagraphElement>(null);
+  const welcome_ref = useRef<HTMLHeadingElement>(null);
 
-  // TODO - pw, email, username match
+  // pw, email, username match users in db
   const [success,setSuccess] = useState(false);
+  // fetched user data from backend
+  const [user,setUser] = useState<User | null>(null);
 
+  //fetch data from json-server users
+  /*const [users,setUsers] = useState(null);
+  useEffect(()=>{
+    fetch(`http://localhost:8000/users`)
+    .then(res =>{
+      return res.json();
+    })
+    .then((data)=>{
+      setUsers(data);
+      console.log(`fetched user data from server`);
+      console.log(data);
+    })
+  },[]);*/
+
+  //after DOM had welcome_ref,change title
+  useEffect(() => {
+  if (success && welcome_ref.current && user) {
+    welcome_ref.current.textContent = `Welcome, ${user.name}!`;
+  }
+  }, [success]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,26 +64,34 @@ const SignInForm: React.FC = () => {
     } 
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //prevent unvalid data check
     if ((touchedEmail && formData.email && !isValidEmail(formData.email)
        ||touchedPassword && formData.password && !isValidPassword(formData.password))
        && auth_hint.current){
       setSuccess(false);
-      auth_hint.current.textContent = "unvalid email or password, please retry";
-      console.log('email or password not in the right form')
+      auth_hint.current.textContent = "wrong email or password format, please retry";
     }else if(auth_hint.current){
       //check if is a user, todo
-      setSuccess(false);
-      auth_hint.current.textContent = "there's no account under this email, please register";
-      console.log(touchedEmail,touchedPassword);
-      console.log('Login failed: not an user');
-    }else{
-      //is a user, login sucess
-      setSuccess(true);
-      console.log('Login success');
-      console.log('Registering:', formData);
+      try {
+        const response = await fetch(
+          `http://localhost:8000/users?email=${formData.email}&password=${formData.password}`
+        )
+        const data: User[] = await response.json();
+        //console a list of paired user, if none paired return []
+        console.log(data);
+
+        if (data.length > 0) {
+          auth_hint.current.textContent =`Welcome, ${data[0].name}!`;
+          setSuccess(true); //make sure welcome_ref is already in DOM
+          setUser(data[0]);
+        } else {
+          auth_hint.current.textContent ='Invalid username or password.';
+        }
+      } catch (err) {
+        console.log('error catched!');
+      }
     }
   };
 
@@ -67,6 +103,22 @@ const SignInForm: React.FC = () => {
 
 
   return (
+    <>
+    {success?(
+      //After Signed In
+      <div className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md">
+        <h2 className="text-2xl font-semibold text-center mb-6"
+            ref={welcome_ref}>
+          {'You Are Signed In!'}</h2>
+        <button
+        onClick={()=>console.log(`TODO go web navigation!`)}
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300"
+      >
+        Naviage Now
+      </button>
+      </div>
+    ) : (
+      //Sign In Form
     <form
       onSubmit={handleSubmit}
       className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md"
@@ -76,20 +128,6 @@ const SignInForm: React.FC = () => {
         ref={auth_hint}
         className="text-center text-sm text-red-600 mt-1"> 
         {''}</p>
-
-      {/* Name Field */}
-      <label htmlFor="name" className="block font-medium mb-1">
-        Name
-      </label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        required
-        value={formData.name}
-        onChange={handleChange}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
 
       {/* Email Field */}
       <label htmlFor="email" className="block mt-4 font-medium mb-1">
@@ -158,6 +196,8 @@ const SignInForm: React.FC = () => {
             Don't Have an Account? Register Here --&gt;</p>
       </a>
     </form>
+  )}
+    </>
   );
 };
 

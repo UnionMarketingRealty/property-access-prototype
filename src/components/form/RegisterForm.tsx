@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
 
+import api from '../../api/axios';
+
 interface FormData {
   name: string;
   email: string;
@@ -43,7 +45,7 @@ const RegisterForm: React.FC = () => {
       console.log('email or password not in the right format')
     }else if(auth_hint.current){
       //authentication check - for now, no new register enabled
-      auth_hint.current.textContent = "you are not an authenticated user yet";
+      auth_hint.current.innerHTML = "you are not an authenticated user yet <br>please contact xxx-xxx-xxxx first";
         console.log('Registering failed: not an authenticated user');
     }
   };
@@ -73,7 +75,7 @@ const RegisterForm: React.FC = () => {
       <input
         type="text"
         name="name"
-        id="name"
+        id="register-name"
         required
         value={formData.name}
         onChange={handleChange}
@@ -87,7 +89,7 @@ const RegisterForm: React.FC = () => {
       <input
         type="email"
         name="email"
-        id="email"
+        id="register-email"
         required
         value={formData.email}
         onChange={handleChange}
@@ -114,7 +116,7 @@ const RegisterForm: React.FC = () => {
       <input
         type="password"
         name="password"
-        id="password"
+        id="register-password"
         required
         value={formData.password}
         onChange={handleChange}
