@@ -1,10 +1,22 @@
 import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
 
+import api from '../../api/axios';
+
 interface FormData {
   name: string;
   email: string;
   password: string;
 }
+
+type LoginResponse = {
+  token: string;
+  user: {
+    name: string;
+    email: string;
+    password: string;
+  };
+};
+
 
 const SignInForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -12,6 +24,7 @@ const SignInForm: React.FC = () => {
     email: '',
     password: '',
   });
+  const LOGIN_URL = '/login';
 
   const [touchedEmail, setTouchedEmail] = useState(false);
   const [touchedPassword, setTouchedPassword] = useState(false);
@@ -36,7 +49,7 @@ const SignInForm: React.FC = () => {
     } 
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //prevent unvalid data check
     if ((touchedEmail && formData.email && !isValidEmail(formData.email)
@@ -45,7 +58,7 @@ const SignInForm: React.FC = () => {
       setSuccess(false);
       auth_hint.current.textContent = "unvalid email or password, please retry";
       console.log('email or password not in the right form')
-    }else if(auth_hint.current){
+    }else if(auth_hint.current ){
       //check if is a user, todo
       setSuccess(false);
       auth_hint.current.textContent = "there's no account under this email, please register";
@@ -53,9 +66,21 @@ const SignInForm: React.FC = () => {
       console.log('Login failed: not an user');
     }else{
       //is a user, login sucess
-      setSuccess(true);
-      console.log('Login success');
+      alert('✅ we went else');
+      {/*try{
+        const res = await api.get(LOGIN_URL, {
+          params: {
+            name:'Shirong Tang',
+            email: 'test@example.com',
+            password: '123456'}
+        });
+        if (res.data.length > 0) {
+          alert('✅ Login success');
+        } else {
+          alert('❌ Invalid credentials');}
       console.log('Registering:', formData);
+      }catch(err){
+      }*/}
     }
   };
 

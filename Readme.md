@@ -79,17 +79,17 @@ npm install
 (to be done, no .env yet)
 
 
-4. Run the development server
+4. Run the front end
 ```bash
 npm run dev
 ```
 Visit http://localhost:5173 in your browser.
 
-5. (Todo) Mock API backend
+5. run the json-server Mock backend
 We're using json-server to mock property data:
 
 ```bash
-npx json-server --watch db.json --port 4000
+npx json-server --watch data/db.json --port 8000
 ```
 
 ## 🔐 Security Practices
