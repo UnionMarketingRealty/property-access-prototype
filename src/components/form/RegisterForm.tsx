@@ -32,7 +32,7 @@ const RegisterForm: React.FC = () => {
     } 
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Registering:', formData);
     //prevent unvalid data check
@@ -42,6 +42,7 @@ const RegisterForm: React.FC = () => {
       auth_hint.current.textContent = "unvalid email or password, please retry";
       console.log('email or password not in the right format')
     }else if(auth_hint.current){
+      //authentication check - for now, no new register enabled
       auth_hint.current.textContent = "you are not an authenticated user yet";
         console.log('Registering failed: not an authenticated user');
     }
@@ -141,9 +142,9 @@ const RegisterForm: React.FC = () => {
         Register
       </button>
 
-      <a href='/sign-in'>
+      <a href='#sign-in'>
         <p className="mt-5 text-center text-sm underline font-medium text-gray-400 hover:text-sky-700 cursor-pointer">
-            Already a user? Sign In Here --&gt;</p>
+            Already Registered? Sign In Here --&gt;</p>
       </a>
     </form>
   );
