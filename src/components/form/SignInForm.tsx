@@ -1,7 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent, useRef, useEffect } from 'react';
 
-import api from '../../api/axios';
-
 interface FormData {
   email: string;
   password: string;
@@ -19,14 +17,16 @@ const SignInForm: React.FC = () => {
     email: '',
     password: '',
   });
-  const LOGIN_URL = '/login';
 
   const [touchedEmail, setTouchedEmail] = useState(false);
   const [touchedPassword, setTouchedPassword] = useState(false);
   const auth_hint = useRef<HTMLParagraphElement>(null);
+  const welcome_ref = useRef<HTMLHeadingElement>(null);
 
-  // TODO - pw, email, username match users in db
+  // pw, email, username match users in db
   const [success,setSuccess] = useState(false);
+  // fetched user data from backend
+  const [user,setUser] = useState<User | null>(null);
 
   //fetch data from json-server users
   /*const [users,setUsers] = useState(null);
@@ -41,6 +41,13 @@ const SignInForm: React.FC = () => {
       console.log(data);
     })
   },[]);*/
+
+  //after DOM had welcome_ref,change title
+  useEffect(() => {
+  if (success && welcome_ref.current && user) {
+    welcome_ref.current.textContent = `Welcome, ${user.name}!`;
+  }
+  }, [success]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -64,22 +71,21 @@ const SignInForm: React.FC = () => {
        ||touchedPassword && formData.password && !isValidPassword(formData.password))
        && auth_hint.current){
       setSuccess(false);
-      auth_hint.current.textContent = "unvalid email or password, please retry";
+      auth_hint.current.textContent = "wrong email or password format, please retry";
     }else if(auth_hint.current){
       //check if is a user, todo
-      console.log(formData.email,formData.password);
-      console.log(`http://localhost:8000/users?email=${formData.email}&password=${formData.password}`);
       try {
         const response = await fetch(
           `http://localhost:8000/users?email=${formData.email}&password=${formData.password}`
         )
         const data: User[] = await response.json();
+        //console a list of paired user, if none paired return []
         console.log(data);
-        console.log(data.length);
 
         if (data.length > 0) {
           auth_hint.current.textContent =`Welcome, ${data[0].name}!`;
-          setSuccess(true);
+          setSuccess(true); //make sure welcome_ref is already in DOM
+          setUser(data[0]);
         } else {
           auth_hint.current.textContent ='Invalid username or password.';
         }
@@ -101,8 +107,9 @@ const SignInForm: React.FC = () => {
     {success?(
       //After Signed In
       <div className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">
-          You Are Signed In!</h2>
+        <h2 className="text-2xl font-semibold text-center mb-6"
+            ref={welcome_ref}>
+          {'You Are Signed In!'}</h2>
         <button
         onClick={()=>console.log(`TODO go web navigation!`)}
         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300"
