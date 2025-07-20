@@ -22,6 +22,7 @@ This is a React + Tailwind CSS web demo built for **Union Marketing**, showcasin
 | Tailwind CSS   | UI Styling                       |
 | Vite           | Development & Build Tool         |
 | React Router   | Client-side Routing              |
+| Axios | API call receive & fetch       |
 | JSON Server / Mock API | Backend simulation (optional) |
 | ESLint + Prettier | Code Quality & Formatting       |
 
@@ -35,27 +36,26 @@ src/
 │
 ├── assets/            # Static assets (images, icons)
 ├── components/        # Reusable UI components
-│   └── PropertyCard.jsx
-│   └── Navbar.jsx
-│   └── LoginForm.jsx
+│   └── form/          # Login and Register Form 
+│   └── Navbar.tsx
+│   └── ...
 │
 ├── pages/             # Route-level pages
-│   └── Login.jsx
-│   └── Home.jsx
-│   └── PropertyDetails.jsx
+│   └── Login.tsx
+│   └── Home.tsx
+│   └── ...
 │
 ├── services/          # API calls & data handling (to be done)
 │   └── propertyService.js
 │
 ├── data/          # fake data (to be updated to a json server)
-│   └── properties.ts
+│   └── ...
 │
 ├── hooks/          # fake data (to be updated to a json server)
-│   └── usePropertyFilters.ts
-│   └── useSavedProperties.ts
+│   └── ...
 │
 ├── contexts/          # Auth context & state management (to be done)
-│   └── AuthProvider.jsx
+│   └── AuthProvider.tsx
 │
 ├── utils/             # Helper functions
 ├── App.tsx            # Root component with routing

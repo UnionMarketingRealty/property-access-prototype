@@ -49,7 +49,7 @@ const SignInForm: React.FC = () => {
       //check if is a user, todo
       setSuccess(false);
       auth_hint.current.textContent = "there's no account under this email, please register";
-      console.log(touchedEmail,touchedPassword);
+      console.log(touchedEmail,touchedPassword,`valid input format`);
       console.log('Login failed: not an user');
     }else{
       //is a user, login sucess
@@ -67,6 +67,21 @@ const SignInForm: React.FC = () => {
 
 
   return (
+    <>
+    {success?(
+      //After Signed In
+      <div className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md">
+        <h2 className="text-2xl font-semibold text-center mb-6">
+          You Are Signed In!</h2>
+        <button
+        onClick={()=>console.log(`TODO go web navigation!`)}
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300"
+      >
+        Naviage Now
+      </button>
+      </div>
+    ) : (
+      //Sign In Form
     <form
       onSubmit={handleSubmit}
       className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md"
@@ -158,6 +173,8 @@ const SignInForm: React.FC = () => {
             Don't Have an Account? Register Here --&gt;</p>
       </a>
     </form>
+  )}
+    </>
   );
 };
 

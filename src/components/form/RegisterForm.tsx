@@ -43,7 +43,7 @@ const RegisterForm: React.FC = () => {
       console.log('email or password not in the right format')
     }else if(auth_hint.current){
       //authentication check - for now, no new register enabled
-      auth_hint.current.textContent = "you are not an authenticated user yet";
+      auth_hint.current.innerHTML = "you are not an authenticated user yet <br>please contact xxx-xxx-xxxx first";
         console.log('Registering failed: not an authenticated user');
     }
   };
