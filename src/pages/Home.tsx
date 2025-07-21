@@ -17,6 +17,25 @@ import { useAuth } from '../contexts/authContext';
 
 
 const Home = () => {
+  // get login user in sessionStorage
+  const { user } = useAuth();
+  
+  //fetch data from json-server users
+  const [property,setProperties] = useState(null);
+  useEffect(()=>{
+    if(user){
+      fetch(`http://localhost:8000/properties/?_limit=10`)
+      .then(res =>{
+        return res.json();
+      })
+      .then((data)=>{
+        setProperties(data);
+        console.log(`fetched 10 property data from server`);
+        console.log(data);
+      })
+    }
+  },[user]);
+
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
@@ -45,17 +64,6 @@ const Home = () => {
     setSelectedProperty(null);
   };
 
-  //check if logged in - move to authContext
-  /*const loggedIn = sessionStorage.getItem('login_user');
-  useEffect(()=>{
-  if (loggedIn) {
-      const user = JSON.parse(loggedIn); // parse back into an object
-      console.log(user.name); 
-      console.log(user.email);
-    }
-  },[])*/
-  const { user } = useAuth();
-  
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -186,6 +194,7 @@ const Home = () => {
               )
             )}
             {/*login to view more hint*/}
+            { !user && 
             <div className="text-center mt-8 mx-auto">
               <p className="text-gray-700 text-lg font-medium">
                 🔒 Log in to view more properties and full details.
@@ -196,10 +205,11 @@ const Home = () => {
               >
                 Log In
               </button>
-            </div>
+            </div>}
           </section>
         )}
 
+        {/* If not signed in: pop up window leads to sign in */}
         {!user && hint && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white p-6 rounded-xl shadow-lg max-w-sm text-center">
