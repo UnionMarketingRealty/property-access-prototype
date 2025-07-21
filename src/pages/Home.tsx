@@ -13,6 +13,7 @@ import { properties } from '../data/properties';
 import { usePropertyFilters } from '../hooks/usePropertyFilters';
 import { useSavedProperties } from '../hooks/useSavedProperties';
 import { Property } from '../types/Property';
+import { useAuth } from '../contexts/authContext';
 
 
 const Home = () => {
@@ -43,15 +44,16 @@ const Home = () => {
     setSelectedProperty(null);
   };
 
-  //check if logged in
-  const loggedIn = sessionStorage.getItem('login_user');
+  //check if logged in - move to authContext
+  /*const loggedIn = sessionStorage.getItem('login_user');
   useEffect(()=>{
   if (loggedIn) {
       const user = JSON.parse(loggedIn); // parse back into an object
       console.log(user.name); 
       console.log(user.email);
     }
-  },[])
+  },[])*/
+  const { user,logout } = useAuth();
   
 
   return (
@@ -169,9 +171,9 @@ const Home = () => {
         )}
 
         {/* Mortgage Calculator */}
-        <section className="mt-16">
+        { user && <section className="mt-16">
           <MortgageCalculator />
-        </section>
+        </section>}
 
         {/* Call to Action */}
         <section className="mt-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 md:p-12 text-center text-white">
