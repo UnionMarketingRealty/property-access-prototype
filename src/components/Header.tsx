@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { Search, Menu, X, Home, Phone, Mail } from 'lucide-react';
 
-interface HeaderProps {
-  onSearch: (query: string) => void;
-}
 
-const Header: React.FC<HeaderProps> = ({ onSearch }) => {
+const Header: React.FC= () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(searchQuery);
   };
 
   return (
@@ -61,7 +57,9 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
 
           {/* Sign In Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+            <button 
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              onClick={() => window.location.href = '/sign-in'}>
               Sign In
             </button>
           </div>
