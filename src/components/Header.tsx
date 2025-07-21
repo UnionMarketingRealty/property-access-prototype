@@ -17,7 +17,8 @@ const Header: React.FC= () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 hover:cursor-pointer"
+              onClick={()=>window.location.href='/'}>
             <Home className="h-8 w-8 text-blue-600" />
             <span className="text-2xl font-bold text-gray-900">Union Homes</span>
           </div>

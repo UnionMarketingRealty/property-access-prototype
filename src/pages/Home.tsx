@@ -20,6 +20,7 @@ const Home = () => {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
+  const [hint,setHint] = useState(false);
   
   const {
     filters,
@@ -53,7 +54,7 @@ const Home = () => {
       console.log(user.email);
     }
   },[])*/
-  const { user,logout } = useAuth();
+  const { user } = useAuth();
   
 
   return (
@@ -111,7 +112,7 @@ const Home = () => {
         {viewMode === 'grid' && filteredProperties.some(p => p.featured) && (
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Featured Properties</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Top Ranking Properties</h2>
               <div className="h-1 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full w-24"></div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -121,6 +122,7 @@ const Home = () => {
                 .map(property => (
                   <PropertyCard
                     key={property.id}
+                    visible={true}
                     property={property}
                     onClick={() => handlePropertyClick(property)}
                   />
@@ -156,19 +158,64 @@ const Home = () => {
                   Clear All Filters
                 </button>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            ) 
+            :(
+              user?(
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProperties.map(property => (
                   <PropertyCard
+                    visible={true}
                     key={property.id}
                     property={property}
                     onClick={() => handlePropertyClick(property)}
                   />
                 ))}
-              </div>
+                </div>
+              )
+              :(//not logged in - only view 3 of the properties
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProperties.slice(0,3).map(property => (
+                  <PropertyCard
+                    visible={false}
+                    key={property.id}
+                    property={property}
+                    onClick={() => setHint(true)}
+                  />
+                ))}
+                </div>
+              )
             )}
+            {/*login to view more hint*/}
+            <div className="text-center mt-8 mx-auto">
+              <p className="text-gray-700 text-lg font-medium">
+                🔒 Log in to view more properties and full details.
+              </p>
+              <button
+                onClick={() => window.location.href = '/sign-in'}
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+              >
+                Log In
+              </button>
+            </div>
           </section>
         )}
+
+        {!user && hint && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white p-6 rounded-xl shadow-lg max-w-sm text-center">
+            <h2 className="text-xl font-semibold mb-3">Unlock Full Access</h2>
+            <p className="text-gray-600 mb-5">
+              Sign in to view all properties, see detailed listings, and access exclusive features.
+            </p>
+            <button
+              onClick={() => window.location.href = '/sign-in'}
+              className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Sign In Now
+            </button>
+          </div>
+        </div>
+      )}
 
         {/* Mortgage Calculator */}
         { user && <section className="mt-16">
@@ -208,8 +255,8 @@ const Home = () => {
       )}
 
       {/* Floating Components */}
-      {/* <SavedProperties onPropertyClick={handlePropertyClick} /> */}
-      {/* <PropertyComparison availableProperties={filteredProperties} /> */}
+      { user &&<SavedProperties onPropertyClick={handlePropertyClick} />}
+      { user &&<PropertyComparison availableProperties={filteredProperties} /> }
     </div>
   )
 }
