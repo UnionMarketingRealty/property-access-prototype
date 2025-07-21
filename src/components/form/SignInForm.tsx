@@ -46,6 +46,7 @@ const SignInForm: React.FC = () => {
   useEffect(() => {
   if (success && welcome_ref.current && user) {
     welcome_ref.current.textContent = `Welcome, ${user.name}!`;
+    console.log(`Signed In as ${user.name}`);
   }
   }, [success]);
 
@@ -85,9 +86,11 @@ const SignInForm: React.FC = () => {
         if (data.length > 0) {
           auth_hint.current.textContent =`Welcome, ${data[0].name}!`;
           setSuccess(true); //make sure welcome_ref is already in DOM
-          setUser(data[0]);
+          setUser(data[0]); //stored user data that matches from backend
+          sessionStorage.setItem('login_user', JSON.stringify(data[0]));
         } else {
           auth_hint.current.textContent ='Invalid username or password.';
+          console.log('Invalid username or password');
         }
       } catch (err) {
         console.log('error catched!');
@@ -111,7 +114,7 @@ const SignInForm: React.FC = () => {
             ref={welcome_ref}>
           {'You Are Signed In!'}</h2>
         <button
-        onClick={()=>console.log(`TODO go web navigation!`)}
+        onClick={()=>window.location.href='/'}
         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300"
       >
         Naviage Now
@@ -191,7 +194,7 @@ const SignInForm: React.FC = () => {
         Sign In
       </button>
 
-      <a href='#register'>
+      <a href='/register'>
         <p className="mt-5 text-center text-sm underline font-medium text-gray-400 hover:text-sky-700 cursor-pointer">
             Don't Have an Account? Register Here --&gt;</p>
       </a>

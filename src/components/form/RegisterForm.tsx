@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
 
-import api from '../../api/axios';
+//import api from '../../api/axios';
 
 interface FormData {
   name: string;
@@ -144,7 +144,7 @@ const RegisterForm: React.FC = () => {
         Register
       </button>
 
-      <a href='#sign-in'>
+      <a href='/sign-in'>
         <p className="mt-5 text-center text-sm underline font-medium text-gray-400 hover:text-sky-700 cursor-pointer">
             Already Registered? Sign In Here --&gt;</p>
       </a>

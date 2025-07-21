@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
-export default axios.create({
-  //will run the backend at 3500
+const api: AxiosInstance = axios.create({
   baseURL: 'http://localhost:3500',
 });
+
+export default api;
