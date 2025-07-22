@@ -4,10 +4,17 @@ import Register from "./pages/Register";
 import SignIn from "./pages/SignIn";
 import Contact from "./pages/Contact";
 
+import { Helmet } from 'react-helmet';
+
 function App() {
 
 
   return (
+    <>
+    <Helmet>
+      <meta name="robots" content="noindex, nofollow" />
+    </Helmet>
+
     <BrowserRouter>
       <Routes>
         <Route element={<Home/>} path='/'/>
@@ -16,6 +23,7 @@ function App() {
         <Route element={<Contact/>} path='/contact'/>
       </Routes>
     </BrowserRouter>
+    </>
   );
 }
 
