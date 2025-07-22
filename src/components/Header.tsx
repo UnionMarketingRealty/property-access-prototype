@@ -25,14 +25,11 @@ const Header: React.FC= () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#buy" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+            <a href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Buy
             </a>
-            <a href="#rent" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+            <a href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Rent
-            </a>
-            <a href="#sell" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-              Sell
             </a>
             <a href="#agents" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Agent
@@ -107,14 +104,11 @@ const Header: React.FC= () => {
                   </button>
                 </div>
               </form>
-              <a href="#buy" className="text-gray-700 hover:text-blue-600 font-medium py-2">
+              <a href="/" className="text-gray-700 hover:text-blue-600 font-medium py-2">
                 Buy
               </a>
-              <a href="#rent" className="text-gray-700 hover:text-blue-600 font-medium py-2">
+              <a href="/" className="text-gray-700 hover:text-blue-600 font-medium py-2">
                 Rent
-              </a>
-              <a href="#sell" className="text-gray-700 hover:text-blue-600 font-medium py-2">
-                Sell
               </a>
               <a href="#agents" className="text-gray-700 hover:text-blue-600 font-medium py-2">
                 Agents
