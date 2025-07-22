@@ -60,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({ onFiltersChange, scrollTo }) => {
         </div>
 
         {/* Search Form */}
-        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-4xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-4xl mx-auto mb-8">
           {/* Buy/Rent Tabs */}
           <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
             <button
