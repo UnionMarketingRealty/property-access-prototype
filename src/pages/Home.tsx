@@ -21,19 +21,25 @@ const Home = () => {
   const { user } = useAuth();
   
   //fetch data from json-server users
-  const [property,setProperties] = useState(null);
+  const [property,setProperties] = useState(properties);
   useEffect(()=>{
-    if(user){
-      fetch(`http://localhost:8000/properties/?_limit=10`)
-      .then(res =>{
-        return res.json();
-      })
-      .then((data)=>{
-        setProperties(data);
-        console.log(`fetched 10 property data from server`);
-        console.log(data);
-      })
+    //check fetch limit
+    let limit;
+    if(!user){
+      limit = 10;
+    }else{
+      limit = 100;
     }
+    //fetch
+    fetch(`http://localhost:8000/properties/?_limit=${limit}`)
+    .then(res =>{
+      return res.json();
+    })
+    .then((data)=>{
+      setProperties(data);
+      console.log(`fetched 10 property data from server`);
+      console.log(data);
+    })
   },[user]);
 
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
@@ -46,7 +52,7 @@ const Home = () => {
     filteredProperties,
     updateFilters,
     clearFilters,
-  } = usePropertyFilters(properties);
+  } = usePropertyFilters(property);
 
   const {
     savedProperties,
@@ -126,7 +132,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProperties
                 .filter(property => property.featured)
-                .slice(0, 3)
+                .slice(0, 6)
                 .map(property => (
                   <PropertyCard
                     key={property.id}

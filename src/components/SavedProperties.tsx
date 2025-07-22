@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Property } from '../types/Property';
-import { Heart, X, Share2 } from 'lucide-react';
+import { Heart, X } from 'lucide-react';
 import PropertyCard from './PropertyCard';
 
 interface SavedPropertiesProps {
@@ -97,6 +97,7 @@ const SavedProperties: React.FC<SavedPropertiesProps> = ({ onPropertyClick }) =>
                     <div className="transform scale-95">
                       <PropertyCard
                         property={property}
+                        visible={true}
                         onClick={() => {
                           onPropertyClick(property);
                           setIsOpen(false);

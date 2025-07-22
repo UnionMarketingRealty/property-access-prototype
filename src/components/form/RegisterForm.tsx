@@ -18,6 +18,7 @@ const RegisterForm: React.FC = () => {
   const [touchedEmail, setTouchedEmail] = useState(false);
   const [touchedPassword, setTouchedPassword] = useState(false);
   const auth_hint = useRef<HTMLParagraphElement>(null);
+  const [showContact,setShowContact]=useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,7 +47,8 @@ const RegisterForm: React.FC = () => {
     }else if(auth_hint.current){
       //authentication check - for now, no new register enabled
       auth_hint.current.innerHTML = "you are not an authenticated user yet <br>please contact xxx-xxx-xxxx first";
-        console.log('Registering failed: not an authenticated user');
+      console.log('Registering failed: not an authenticated user');
+      setShowContact(true);
     }
   };
 
@@ -58,6 +60,7 @@ const RegisterForm: React.FC = () => {
 
 
   return (
+    <>
     <form
       onSubmit={handleSubmit}
       className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md"
@@ -149,6 +152,30 @@ const RegisterForm: React.FC = () => {
             Already Registered? Sign In Here --&gt;</p>
       </a>
     </form>
+
+    {/* Contact Modal */}
+      {showContact && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white p-6 rounded-xl shadow-lg max-w-sm text-center">
+            <h2 className="text-xl font-semibold mb-3">contact required</h2>
+            <p className="text-gray-600 mb-5">
+              You are not an authenticated user yet
+            </p>
+            <button
+              onClick={() => window.location.href = '/contact'}
+              className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Contact Now!
+            </button>
+
+            <a onClick={()=>setShowContact(false)}>
+              <p className="mt-5 text-center text-sm underline font-medium text-gray-400 hover:text-sky-700 cursor-pointer">
+                  alright maybe later</p>
+            </a>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
