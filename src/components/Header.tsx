@@ -37,7 +37,7 @@ const Header: React.FC= () => {
             <a href="#agents" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Agent
             </a>
-            <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+            <a href="/contact" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Contact
             </a>
           </nav>
@@ -119,7 +119,7 @@ const Header: React.FC= () => {
               <a href="#agents" className="text-gray-700 hover:text-blue-600 font-medium py-2">
                 Agents
               </a>
-              <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium py-2">
+              <a href="/contact" className="text-gray-700 hover:text-blue-600 font-medium py-2">
                 Contact Us
               </a>
               {user ? (

@@ -304,7 +304,9 @@ const Home = () => {
             Let our licensed RECO agents help you navigate the Greater Toronto Area market and find the perfect home that matches your needs and budget.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors font-medium">
+            <button 
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+              onClick={()=>window.location.href='/contact'}>
               Talk to a Realtor
             </button>
             <button className="border border-white text-white px-8 py-3 rounded-lg hover:bg-white/10 transition-colors font-medium">

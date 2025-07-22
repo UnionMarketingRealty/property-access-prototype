@@ -47,7 +47,7 @@ const Hero: React.FC<HeroProps> = ({ onFiltersChange, scrollTo }) => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="text-center mb-12">
           {user?
-          <h1 className="mt-3 text-4xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="mt-8 text-4xl md:text-6xl font-bold text-white mb-6">
             Welcome {user.name}!
           </h1>
           :<h1></h1>}
@@ -55,12 +55,12 @@ const Hero: React.FC<HeroProps> = ({ onFiltersChange, scrollTo }) => {
             Find Your Dream Home in the GTA
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-            Discover the perfect property for sale or lease across Toronto, Mississauga, Brampton, and surrounding areas
+            Discover the perfect property for sale or lease across Toronto
           </p>
         </div>
 
         {/* Search Form */}
-        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-4xl mx-auto mb-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-4xl mx-auto mb-12">
           {/* Buy/Rent Tabs */}
           <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
             <button
