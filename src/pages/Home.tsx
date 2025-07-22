@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import MapView from '../components/MapView';
@@ -37,7 +37,7 @@ const Home = () => {
     })
     .then((data)=>{
       setProperties(data);
-      console.log(`fetched 10 property data from server`);
+      console.log(`fetched ${limit} property data from server`);
       console.log(data);
     })
   },[user]);
@@ -46,6 +46,7 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
   const [hint,setHint] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
   
   const {
     filters,
@@ -70,12 +71,26 @@ const Home = () => {
     setSelectedProperty(null);
   };
 
+  const scrollToSection = () => {
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  //total pages display
+  const ITEMS_PER_PAGE = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(filteredProperties.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentItems = filteredProperties.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const goToPage = (page: number) => {
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <Hero onFiltersChange={updateFilters} />
+      <Hero onFiltersChange={updateFilters} scrollTo={scrollToSection}/>
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <PropertyFilters
@@ -126,13 +141,13 @@ const Home = () => {
         {viewMode === 'grid' && filteredProperties.some(p => p.featured) && (
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Top Ranking Properties</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Top Ranking Properties🔥</h2>
               <div className="h-1 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full w-24"></div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProperties
                 .filter(property => property.featured)
-                .slice(0, 6)
+                .slice(0, 3)
                 .map(property => (
                   <PropertyCard
                     key={property.id}
@@ -175,16 +190,58 @@ const Home = () => {
             ) 
             :(
               user?(
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredProperties.map(property => (
-                  <PropertyCard
-                    visible={true}
-                    key={property.id}
-                    property={property}
-                    onClick={() => handlePropertyClick(property)}
-                  />
-                ))}
+                <>
+                <div 
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  ref={sectionRef}
+                >
+                  {currentItems.map(property => (
+                    <PropertyCard
+                      visible={true}
+                      key={property.id}
+                      property={property}
+                      onClick={() => handlePropertyClick(property)}
+                    />
+                  ))}
                 </div>
+                  {/* Pagination Bar */}
+                  <div className="flex justify-center items-center gap-2 mt-6">
+                    <button
+                      onClick={() => {
+                        goToPage(currentPage - 1);
+                        scrollToSection();
+                      }}
+                      disabled={currentPage === 1}
+                      className="px-3 py-1 rounded border bg-white hover:bg-gray-100 disabled:opacity-50"
+                    >
+                      Prev
+                    </button>
+
+                    {[...Array(totalPages)].map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          goToPage(i + 1);
+                          scrollToSection();
+                        }}
+                        className={`px-3 py-1 rounded border ${i + 1 === currentPage ? "bg-blue-500 text-white" : "bg-white hover:bg-gray-100"}`}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
+
+                    <button
+                      onClick={() => {
+                        goToPage(currentPage + 1);
+                        scrollToSection();
+                      }}
+                      disabled={currentPage === totalPages}
+                      className="px-3 py-1 rounded border bg-white hover:bg-gray-100 disabled:opacity-50"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </>
               )
               :(//not logged in - only view 3 of the properties
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -247,7 +304,9 @@ const Home = () => {
             Let our licensed RECO agents help you navigate the Greater Toronto Area market and find the perfect home that matches your needs and budget.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors font-medium">
+            <button 
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+              onClick={()=>window.location.href='/contact'}>
               Talk to a Realtor
             </button>
             <button className="border border-white text-white px-8 py-3 rounded-lg hover:bg-white/10 transition-colors font-medium">

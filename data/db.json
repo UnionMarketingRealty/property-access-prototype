@@ -13,6 +13,24 @@
       "password": "123456@test"
     }
   ],
+  "realtors":[
+    {
+      "id": 1,
+      "name": "Jane Smith",
+      "photo": "https://randomuser.me/api/portraits/women/44.jpg",
+      "phone": "(416) 555-1234",
+      "email": "jane.smith@gtarealty.ca",
+      "description": "Specialist in downtown Toronto condos and luxury rentals."
+    },
+    {
+      "id": 2,
+      "name": "Alex Johnson",
+      "photo": "https://randomuser.me/api/portraits/men/46.jpg",
+      "phone": "(647) 555-5678",
+      "email": "alex.johnson@gtarealty.ca",
+      "description": "Expert in family homes and suburban properties across the GTA."
+    }
+  ],
   "properties": [
     {
       "id": "1",

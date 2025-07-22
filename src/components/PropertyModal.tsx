@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Property } from '../types/Property';
-import { X, Bed, Bath, Square, MapPin, Heart, Share2, Calendar, ChevronLeft, ChevronRight, Phone, Mail } from 'lucide-react';
+import { X, Bed, Bath, Square, MapPin, Heart, Share2, Calendar, ChevronLeft, ChevronRight, Phone, Mail, ShieldCheck } from 'lucide-react';
 
 interface PropertyModalProps {
   property: Property;
@@ -191,6 +191,10 @@ const PropertyModal: React.FC<PropertyModalProps> = ({
                     <div className="flex items-center text-gray-600">
                       <Calendar className="h-4 w-4 mr-2" />
                       <span>Listed {new Date(property.listingDate).toLocaleDateString('en-CA')}</span>
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <ShieldCheck className="h-4 w-4 mr-2" />
+                      <p>Source provided by PROPTX</p>
                     </div>
                   </div>
                 </div>
