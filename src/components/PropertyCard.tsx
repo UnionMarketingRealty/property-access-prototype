@@ -4,11 +4,12 @@ import { Property } from '../types/Property';
 import { useSavedProperties } from '../hooks/useSavedProperties';
 
 interface PropertyCardProps {
+  visible:boolean;
   property: Property;
   onClick: () => void;
 }
 
-const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick }) => {
+const PropertyCard: React.FC<PropertyCardProps> = ({ visible,property, onClick }) => {
   const { isPropertySaved, toggleSavedProperty } = useSavedProperties();
 
   const formatPrice = (price: number, type: 'sale' | 'lease') => {
@@ -33,7 +34,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick }) => {
         <img
           src={property.images[0]}
           alt={property.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500
+            ${visible ? '' : 'blur'}`}
         />
         
         {/* Badge */}

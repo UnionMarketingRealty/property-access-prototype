@@ -1,28 +1,14 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "Alice",
-      "email": "alice@example.com",
-      "password": "123456@test"
-    },
-    {
-      "id": 2,
-      "name": "Tester",
-      "email": "test@example.com",
-      "password": "123456@test"
-    }
-  ],
   "properties": [
     {
       "id": "1",
-      "title": "Executive Townhome",
-      "price": 4045,
+      "title": "King West Luxury Condo #1",
+      "price": -14045,
       "priceType": "lease",
       "address": "101 Front Street",
-      "city": "Toronto Great Area",
+      "city": "North York",
       "province": "ON",
-      "bedrooms": 4,
+      "bedrooms": 5,
       "bathrooms": 3,
       "sqft": 992,
       "propertyType": "condo",
@@ -47,10 +33,10 @@
     {
       "id": "2",
       "title": "King West Luxury Condo #2",
-      "price": 3698,
+      "price": 78698,
       "priceType": "lease",
       "address": "606 Sheppard Avenue",
-      "city": "Toronto",
+      "city": "North York",
       "province": "ON",
       "bedrooms": 3,
       "bathrooms": 2,
@@ -77,7 +63,7 @@
     {
       "id": "3",
       "title": "Executive Townhome in Mississauga #3",
-      "price": 1431000,
+      "price": 1431343,
       "priceType": "sale",
       "address": "303 Dundas Street",
       "city": "Oakville",
@@ -108,10 +94,10 @@
     {
       "id": "4",
       "title": "King West Luxury Condo #4",
-      "price": 6096,
+      "price": -16096,
       "priceType": "lease",
       "address": "404 Yonge Street",
-      "city": "Toronto",
+      "city": "Etobicoke",
       "province": "ON",
       "bedrooms": 3,
       "bathrooms": 2,
@@ -138,7 +124,7 @@
     {
       "id": "5",
       "title": "King West Luxury Condo #5",
-      "price": 3490,
+      "price": 99490,
       "priceType": "lease",
       "address": "606 Sheppard Avenue",
       "city": "Oakville",
@@ -168,7 +154,7 @@
     {
       "id": "6",
       "title": "Executive Townhome in Mississauga #6",
-      "price": 1281000,
+      "price": 1281561,
       "priceType": "sale",
       "address": "505 Eglinton Avenue",
       "city": "Scarborough",
@@ -199,10 +185,10 @@
     {
       "id": "7",
       "title": "King West Luxury Condo #7",
-      "price": 3256,
+      "price": -169256,
       "priceType": "lease",
       "address": "404 Yonge Street",
-      "city": "Toronto",
+      "city": "Scarborough",
       "province": "ON",
       "bedrooms": 2,
       "bathrooms": 2,
@@ -229,10 +215,10 @@
     {
       "id": "8",
       "title": "King West Luxury Condo #8",
-      "price": 4261,
+      "price": 170261,
       "priceType": "lease",
       "address": "606 Sheppard Avenue",
-      "city": "Toronto",
+      "city": "Vaughan",
       "province": "ON",
       "bedrooms": 4,
       "bathrooms": 2,
@@ -259,10 +245,10 @@
     {
       "id": "9",
       "title": "King West Luxury Condo #9",
-      "price": 3302,
+      "price": -170302,
       "priceType": "lease",
       "address": "123 Bay Street",
-      "city": "Toronto",
+      "city": "Brampton",
       "province": "ON",
       "bedrooms": 2,
       "bathrooms": 1,
@@ -289,10 +275,10 @@
     {
       "id": "10",
       "title": "King West Luxury Condo #10",
-      "price": 5835,
+      "price": -110835,
       "priceType": "lease",
       "address": "606 Sheppard Avenue",
-      "city": "Toronto",
+      "city": "Etobicoke",
       "province": "ON",
       "bedrooms": 3,
       "bathrooms": 2,
@@ -513,7 +499,7 @@
       "bedrooms": 5,
       "bathrooms": 1,
       "sqft": 1053,
-      "propertyType": "apartment",
+      "propertyType": "condo",
       "images": [
         "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=800",
         "https://images.pexels.com/photos/2029667/pexels-photo-2029667.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -535,7 +521,7 @@
     {
       "id": "18",
       "title": "King West Luxury Condo #18",
-      "price": 7645,
+      "price": -77645,
       "priceType": "lease",
       "address": "505 Eglinton Avenue",
       "city": "Etobicoke",
@@ -565,7 +551,7 @@
     {
       "id": "19",
       "title": "King West Luxury Condo #19",
-      "price": 4201,
+      "price": 99201,
       "priceType": "lease",
       "address": "456 Queen Street",
       "city": "Vaughan",
@@ -595,7 +581,7 @@
     {
       "id": "20",
       "title": "Executive Townhome in Mississauga #20",
-      "price": 1333000,
+      "price": 1333163,
       "priceType": "sale",
       "address": "101 Front Street",
       "city": "Scarborough",
@@ -626,7 +612,7 @@
     {
       "id": "21",
       "title": "Executive Townhome in Mississauga #21",
-      "price": 1406000,
+      "price": 1406930,
       "priceType": "sale",
       "address": "303 Dundas Street",
       "city": "Oakville",
@@ -657,7 +643,7 @@
     {
       "id": "22",
       "title": "Executive Townhome in Mississauga #22",
-      "price": 1109000,
+      "price": 1109211,
       "priceType": "sale",
       "address": "202 Bloor Street",
       "city": "Oakville",
@@ -688,7 +674,7 @@
     {
       "id": "23",
       "title": "King West Luxury Condo #23",
-      "price": 4800,
+      "price": 188571,
       "priceType": "lease",
       "address": "202 Bloor Street",
       "city": "Brampton",
@@ -718,7 +704,7 @@
     {
       "id": "24",
       "title": "King West Luxury Condo #24",
-      "price": 6100,
+      "price": 12136,
       "priceType": "lease",
       "address": "789 King Street West",
       "city": "Markham",
@@ -726,7 +712,7 @@
       "bedrooms": 3,
       "bathrooms": 1,
       "sqft": 838,
-      "propertyType": "apartment",
+      "propertyType": "condo",
       "images": [
         "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=800",
         "https://images.pexels.com/photos/2029667/pexels-photo-2029667.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -778,16 +764,16 @@
     },
     {
       "id": "26",
-      "title": "King West Luxury House #26",
-      "price": 8308,
+      "title": "King West Luxury Condo #26",
+      "price": 80308,
       "priceType": "lease",
       "address": "404 Yonge Street",
       "city": "Markham",
       "province": "ON",
-      "bedrooms": 4,
-      "bathrooms": 3,
+      "bedrooms": 1,
+      "bathrooms": 2,
       "sqft": 1296,
-      "propertyType": "house",
+      "propertyType": "condo",
       "images": [
         "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=800",
         "https://images.pexels.com/photos/2029667/pexels-photo-2029667.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -840,7 +826,7 @@
     {
       "id": "28",
       "title": "Executive Townhome in Mississauga #28",
-      "price": 1263000,
+      "price": 1263158,
       "priceType": "sale",
       "address": "456 Queen Street",
       "city": "Markham",
@@ -870,16 +856,16 @@
     },
     {
       "id": "29",
-      "title": "Executive Townhome in GTA#29",
+      "title": "Executive Townhome in Mississauga #29",
       "price": 1342720,
       "priceType": "sale",
       "address": "123 Bay Street",
-      "city": "Toronto",
+      "city": "North York",
       "province": "ON",
       "bedrooms": 4,
       "bathrooms": 3,
       "sqft": 2013,
-      "propertyType": "house",
+      "propertyType": "townhouse",
       "images": [
         "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800",
         "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800",

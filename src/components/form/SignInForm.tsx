@@ -50,6 +50,14 @@ const SignInForm: React.FC = () => {
   }
   }, [success]);
 
+  //accept terms
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const handleAcceptTerms = () => {
+    setTermsAccepted(true);
+    setShowTermsModal(false);
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -186,10 +194,27 @@ const SignInForm: React.FC = () => {
         </p>
       )}
 
+      {/* Term Aknowledge */}
+      <div className="mt-5 flex items-center space-x-4">
+          <input
+            type="checkbox"
+            checked={termsAccepted}
+            onChange={(e) => setTermsAccepted(e.target.checked)}
+          />
+          <label className="text-sm">I acknowledge and accept the {' '} 
+            <span 
+              onClick={()=>setShowTermsModal(true)}
+              className="text-sky-600 font-medium underline underline-offset-1 cursor-pointer">
+              terms</span>
+          </label>
+      </div>
+
       {/* Submit */}
       <button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300"
+        disabled={!termsAccepted}
+        className={`w-full text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300
+          ${termsAccepted?`bg-blue-600 hover:bg-blue-700`:`bg-gray-300`}`}
       >
         Sign In
       </button>
@@ -200,7 +225,56 @@ const SignInForm: React.FC = () => {
       </a>
     </form>
   )}
-    </>
+
+  {showTermsModal && (
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+      <div className="bg-white p-6 rounded-xl max-w-md space-y-4 shadow-lg">
+        <h3 className="text-lg font-bold">Terms and Conditions</h3>
+        <div className="text-sm max-h-64 overflow-y-auto text-gray-700">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat.
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat.
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat.
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p className="mt-2">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur.
+          </p>
+        </div>
+        <div className="flex justify-end space-x-2">
+          <button
+            onClick={() => setShowTermsModal(false)}
+            className="px-4 py-2 text-gray-600 hover:text-black"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleAcceptTerms}
+            className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
+          >
+            Accept
+          </button>
+        </div>
+      </div>
+    </div>
+  )}
+  </>
   );
 };
 

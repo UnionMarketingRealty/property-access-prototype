@@ -13,19 +13,46 @@ import { properties } from '../data/properties';
 import { usePropertyFilters } from '../hooks/usePropertyFilters';
 import { useSavedProperties } from '../hooks/useSavedProperties';
 import { Property } from '../types/Property';
+import { useAuth } from '../contexts/authContext';
 
 
 const Home = () => {
+  // get login user in sessionStorage
+  const { user } = useAuth();
+  
+  //fetch data from json-server users
+  const [property,setProperties] = useState(properties);
+  useEffect(()=>{
+    //check fetch limit
+    let limit;
+    if(!user){
+      limit = 10;
+    }else{
+      limit = 100;
+    }
+    //fetch
+    fetch(`http://localhost:8000/properties/?_limit=${limit}`)
+    .then(res =>{
+      return res.json();
+    })
+    .then((data)=>{
+      setProperties(data);
+      console.log(`fetched 10 property data from server`);
+      console.log(data);
+    })
+  },[user]);
+
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
+  const [hint,setHint] = useState(false);
   
   const {
     filters,
     filteredProperties,
     updateFilters,
     clearFilters,
-  } = usePropertyFilters(properties);
+  } = usePropertyFilters(property);
 
   const {
     savedProperties,
@@ -43,16 +70,6 @@ const Home = () => {
     setSelectedProperty(null);
   };
 
-  //check if logged in
-  const loggedIn = sessionStorage.getItem('login_user');
-  useEffect(()=>{
-  if (loggedIn) {
-      const user = JSON.parse(loggedIn); // parse back into an object
-      console.log(user.name); 
-      console.log(user.email);
-    }
-  },[])
-  
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -109,16 +126,17 @@ const Home = () => {
         {viewMode === 'grid' && filteredProperties.some(p => p.featured) && (
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Featured Properties</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Top Ranking Properties</h2>
               <div className="h-1 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full w-24"></div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProperties
                 .filter(property => property.featured)
-                .slice(0, 3)
+                .slice(0, 6)
                 .map(property => (
                   <PropertyCard
                     key={property.id}
+                    visible={true}
                     property={property}
                     onClick={() => handlePropertyClick(property)}
                   />
@@ -154,24 +172,71 @@ const Home = () => {
                   Clear All Filters
                 </button>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            ) 
+            :(
+              user?(
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProperties.map(property => (
                   <PropertyCard
+                    visible={true}
                     key={property.id}
                     property={property}
                     onClick={() => handlePropertyClick(property)}
                   />
                 ))}
-              </div>
+                </div>
+              )
+              :(//not logged in - only view 3 of the properties
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProperties.slice(0,3).map(property => (
+                  <PropertyCard
+                    visible={false}
+                    key={property.id}
+                    property={property}
+                    onClick={() => setHint(true)}
+                  />
+                ))}
+                </div>
+              )
             )}
+            {/*login to view more hint*/}
+            { !user && 
+            <div className="text-center mt-8 mx-auto">
+              <p className="text-gray-700 text-lg font-medium">
+                🔒 Log in to view more properties and full details.
+              </p>
+              <button
+                onClick={() => window.location.href = '/sign-in'}
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+              >
+                Log In
+              </button>
+            </div>}
           </section>
         )}
 
+        {/* If not signed in: pop up window leads to sign in */}
+        {!user && hint && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white p-6 rounded-xl shadow-lg max-w-sm text-center">
+            <h2 className="text-xl font-semibold mb-3">Unlock Full Access</h2>
+            <p className="text-gray-600 mb-5">
+              Sign in to view all properties, see detailed listings, and access exclusive features.
+            </p>
+            <button
+              onClick={() => window.location.href = '/sign-in'}
+              className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Sign In Now
+            </button>
+          </div>
+        </div>
+      )}
+
         {/* Mortgage Calculator */}
-        <section className="mt-16">
+        { user && <section className="mt-16">
           <MortgageCalculator />
-        </section>
+        </section>}
 
         {/* Call to Action */}
         <section className="mt-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 md:p-12 text-center text-white">
@@ -206,8 +271,8 @@ const Home = () => {
       )}
 
       {/* Floating Components */}
-      {/* <SavedProperties onPropertyClick={handlePropertyClick} /> */}
-      {/* <PropertyComparison availableProperties={filteredProperties} /> */}
+      { user &&<SavedProperties onPropertyClick={handlePropertyClick} />}
+      { user &&<PropertyComparison availableProperties={filteredProperties} /> }
     </div>
   )
 }

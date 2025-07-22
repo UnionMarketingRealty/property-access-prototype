@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, MapPin, DollarSign, Bed, Bath } from 'lucide-react';
 import { SearchFilters } from '../types/Property';
+import {useAuth} from '../contexts/authContext';
 
 interface HeroProps {
   onFiltersChange: (filters: Partial<SearchFilters>) => void;
@@ -11,6 +12,7 @@ const Hero: React.FC<HeroProps> = ({ onFiltersChange }) => {
   const [location, setLocation] = useState('');
   const [priceRange, setPriceRange] = useState('');
   const [bedrooms, setBedrooms] = useState('');
+  const {user} = useAuth();
 
   const handleSearch = () => {
     const filters: Partial<SearchFilters> = {
@@ -42,6 +44,11 @@ const Hero: React.FC<HeroProps> = ({ onFiltersChange }) => {
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="text-center mb-12">
+          {user?
+          <h1 className="mt-3 text-4xl md:text-6xl font-bold text-white mb-6">
+            Welcome {user.name}!
+          </h1>
+          :<h1></h1>}
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Find Your Dream Home in the GTA
           </h1>
