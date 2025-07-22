@@ -23,41 +23,42 @@ This is a React + Tailwind CSS web demo built for **Union Marketing**, showcasin
 | Vite           | Development & Build Tool         |
 | React Router   | Client-side Routing              |
 | Axios | API call receive & fetch       |
-| JSON Server / Mock API | Backend simulation (optional) |
+| JSON Server / Mock API | Backend simulation |
 | ESLint + Prettier | Code Quality & Formatting       |
 
-[hint]: This demo use icons from lucide-react for logos.
+>[hint]: This demo use icons from lucide-react for logos.
 ---
 
 ## 🧭 Architecture Overview
 
 ```plaintext
+data/
+├── db.json            # backend data stored  
+│
 src/
 │
-├── assets/            # Static assets (images, icons)
+├── api/               # axios api stored
 ├── components/        # Reusable UI components
 │   └── form/          # Login and Register Form 
 │   └── Navbar.tsx
 │   └── ...
+│
+├── contexts/          # Auth context & state management
+│   └── AuthContext.tsx
 │
 ├── pages/             # Route-level pages
 │   └── Login.tsx
 │   └── Home.tsx
 │   └── ...
 │
-├── services/          # API calls & data handling (to be done)
-│   └── propertyService.js
-│
 ├── data/          # fake data (to be updated to a json server)
 │   └── ...
 │
-├── hooks/          # fake data (to be updated to a json server)
+├── hooks/             # custome react hooks
+│   └── ...
+├── types/             # object type stored
 │   └── ...
 │
-├── contexts/          # Auth context & state management (to be done)
-│   └── AuthProvider.tsx
-│
-├── utils/             # Helper functions
 ├── App.tsx            # Root component with routing
 ├── main.tsx           # Entry point
 └── index.css          # Tailwind base styles
