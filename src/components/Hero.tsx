@@ -5,9 +5,10 @@ import {useAuth} from '../contexts/authContext';
 
 interface HeroProps {
   onFiltersChange: (filters: Partial<SearchFilters>) => void;
+  scrollTo: ()=>void;
 }
 
-const Hero: React.FC<HeroProps> = ({ onFiltersChange }) => {
+const Hero: React.FC<HeroProps> = ({ onFiltersChange, scrollTo }) => {
   const [activeTab, setActiveTab] = useState<'sale' | 'lease'>('sale');
   const [location, setLocation] = useState('');
   const [priceRange, setPriceRange] = useState('');
@@ -28,6 +29,7 @@ const Hero: React.FC<HeroProps> = ({ onFiltersChange }) => {
     }
 
     onFiltersChange(filters);
+    scrollTo();
   };
 
   return (

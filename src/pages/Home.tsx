@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import MapView from '../components/MapView';
@@ -46,6 +46,7 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
   const [hint,setHint] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
   
   const {
     filters,
@@ -70,12 +71,15 @@ const Home = () => {
     setSelectedProperty(null);
   };
 
+  const scrollToSection = () => {
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <Hero onFiltersChange={updateFilters} />
+      <Hero onFiltersChange={updateFilters} scrollTo={scrollToSection}/>
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <PropertyFilters
@@ -124,7 +128,7 @@ const Home = () => {
 
         {/* Featured Properties Section */}
         {viewMode === 'grid' && filteredProperties.some(p => p.featured) && (
-          <section className="mb-12">
+          <section className="mb-12" ref={sectionRef}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900">Top Ranking Properties🔥</h2>
               <div className="h-1 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full w-24"></div>
