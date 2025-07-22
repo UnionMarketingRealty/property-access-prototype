@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onFiltersChange, scrollTo }) => {
         }}
       />
       
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 sm:py-6 lg:px-8 w-full">
         <div className="text-center mb-12">
           {user?
           <h1 className="mt-8 text-4xl md:text-6xl font-bold text-white mb-6">
