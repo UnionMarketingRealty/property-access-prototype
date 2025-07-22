@@ -37,7 +37,7 @@ const Home = () => {
     })
     .then((data)=>{
       setProperties(data);
-      console.log(`fetched 10 property data from server`);
+      console.log(`fetched ${limit} property data from server`);
       console.log(data);
     })
   },[user]);
@@ -126,7 +126,7 @@ const Home = () => {
         {viewMode === 'grid' && filteredProperties.some(p => p.featured) && (
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Top Ranking Properties</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Top Ranking Properties🔥</h2>
               <div className="h-1 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full w-24"></div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

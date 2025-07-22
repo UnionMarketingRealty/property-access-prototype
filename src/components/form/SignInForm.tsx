@@ -159,7 +159,7 @@ const SignInForm: React.FC = () => {
             name="email"
             id="email"
             required
-            placeholder="tester@example.com"
+            placeholder="test@example.com"
             value={formData.email}
             onChange={handleChange}
             className={`w-full px-4 py-2 border ${
@@ -242,7 +242,7 @@ const SignInForm: React.FC = () => {
     {showTermsModal && (
       <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
         <div className="bg-white p-6 rounded-xl max-w-md space-y-4 shadow-lg">
-          <h3 className="text-lg font-bold">Terms and Conditions</h3>
+          <h3 className="text-lg font-bold">Terms and Agreements</h3>
           <div className="text-sm max-h-64 overflow-y-auto text-gray-700">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed

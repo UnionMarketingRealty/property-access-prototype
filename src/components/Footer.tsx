@@ -12,8 +12,11 @@ const Footer: React.FC = () => {
               <Home className="h-8 w-8 text-blue-400" />
               <span className="text-2xl font-bold">Union Homes</span>
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-400 mb-2">
               Your trusted partner in Greater Toronto Area real estate. We connect buyers, sellers, and renters with their ideal homes across the GTA.
+            </p>
+            <p className="text-gray-400 mb-4">
+              All properties sourced from @PROPTX
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
