@@ -114,167 +114,180 @@ const SignInForm: React.FC = () => {
 
 
   return (
-    <>
-    {success?(
-      //After Signed In
-      <div className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md">
-        <h2 className="text-2xl font-semibold text-center mb-6"
-            ref={welcome_ref}>
-          {'You Are Signed In!'}</h2>
-        <button
-        onClick={()=>window.location.href='/'}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300"
-      >
-        Naviage Now
-      </button>
-      </div>
-    ) : (
-      //Sign In Form
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md"
-    >
-      <h2 className="text-2xl font-semibold text-center mb-6">Sign In</h2>
-      <p 
-        ref={auth_hint}
-        className="text-center text-sm text-red-600 mt-1"> 
-        {''}</p>
-
-      {/* Email Field */}
-      <label htmlFor="email" className="block mt-4 font-medium mb-1">
-        Email
-      </label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        required
-        value={formData.email}
-        onChange={handleChange}
-        className={`w-full px-4 py-2 border ${
-          !isValidEmail(formData.email) && touchedEmail
-            ? 'border-red-500'
-            : 'border-gray-300'
-        } rounded-lg focus:outline-none focus:ring-2 ${
-          !isValidEmail(formData.email) && touchedEmail
-            ? 'focus:ring-red-500'
-            : 'focus:ring-blue-500'
-        }`}
+    <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 min-h-[500px] flex items-center">
+      {/* Background Image Overlay */}
+      <div 
+        className="absolute inset-0 bg-black/40"
+        style={{
+          backgroundImage: 'url(https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1600)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
       />
-      {touchedEmail && formData.email && !isValidEmail(formData.email) && (
-        <p className="text-sm text-red-600 mt-1">
-          Please enter a valid email address (e.g. john@example.com)
-        </p>
-      )}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {success?(
+          //After Signed In
+          <div className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md">
+            <h2 className="text-2xl font-semibold text-center mb-6"
+                ref={welcome_ref}>
+              {'You Are Signed In!'}</h2>
+            <button
+            onClick={()=>window.location.href='/'}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300"
+          >
+            Naviage Now
+          </button>
+          </div>
+        ) : (
+          //Sign In Form
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-md mx-auto mt-10 mb-10 bg-white p-6 rounded-2xl shadow-md"
+        >
+          <h2 className="text-2xl font-semibold text-center mb-6">Sign In</h2>
+          <p 
+            ref={auth_hint}
+            className="text-center text-sm text-red-600 mt-1"> 
+            {''}</p>
 
-      {/* Password Field */}
-      <label htmlFor="password" className="block mt-4 font-medium mb-1">
-        Password
-      </label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        required
-        value={formData.password}
-        onChange={handleChange}
-        className={`w-full px-4 py-2 border ${
-          !isValidPassword(formData.password) && touchedPassword
-            ? 'border-red-500'
-            : 'border-gray-300'
-        } rounded-lg focus:outline-none focus:ring-2 ${
-          !isValidPassword(formData.password) && touchedPassword
-            ? 'focus:ring-red-500'
-            : 'focus:ring-blue-500'
-        }`}
-      />
-      {touchedPassword && formData.password && !isValidPassword(formData.password) && (
-        <p className="text-sm text-red-600 mt-1">
-          Password must be at least 8 characters long and include a letter, a number, and a special character.
-        </p>
-      )}
-
-      {/* Term Aknowledge */}
-      <div className="mt-5 flex items-center space-x-4">
-          <input
-            type="checkbox"
-            checked={termsAccepted}
-            onChange={(e) => setTermsAccepted(e.target.checked)}
-          />
-          <label className="text-sm">I acknowledge and accept the {' '} 
-            <span 
-              onClick={()=>setShowTermsModal(true)}
-              className="text-sky-600 font-medium underline underline-offset-1 cursor-pointer">
-              terms</span>
+          {/* Email Field */}
+          <label htmlFor="email" className="block mt-4 font-medium mb-1">
+            Email
           </label>
-      </div>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            required
+            placeholder="tester@example.com"
+            value={formData.email}
+            onChange={handleChange}
+            className={`w-full px-4 py-2 border ${
+              !isValidEmail(formData.email) && touchedEmail
+                ? 'border-red-500'
+                : 'border-gray-300'
+            } rounded-lg focus:outline-none focus:ring-2 ${
+              !isValidEmail(formData.email) && touchedEmail
+                ? 'focus:ring-red-500'
+                : 'focus:ring-blue-500'
+            }`}
+          />
+          {touchedEmail && formData.email && !isValidEmail(formData.email) && (
+            <p className="text-sm text-red-600 mt-1">
+              Please enter a valid email address (e.g. tester@example.com)
+            </p>
+          )}
 
-      {/* Submit */}
-      <button
-        type="submit"
-        disabled={!termsAccepted}
-        className={`w-full text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300
-          ${termsAccepted?`bg-blue-600 hover:bg-blue-700`:`bg-gray-300`}`}
-      >
-        Sign In
-      </button>
+          {/* Password Field */}
+          <label htmlFor="password" className="block mt-4 font-medium mb-1">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            required
+            placeholder="123456@test"
+            value={formData.password}
+            onChange={handleChange}
+            className={`w-full px-4 py-2 border ${
+              !isValidPassword(formData.password) && touchedPassword
+                ? 'border-red-500'
+                : 'border-gray-300'
+            } rounded-lg focus:outline-none focus:ring-2 ${
+              !isValidPassword(formData.password) && touchedPassword
+                ? 'focus:ring-red-500'
+                : 'focus:ring-blue-500'
+            }`}
+          />
+          {touchedPassword && formData.password && !isValidPassword(formData.password) && (
+            <p className="text-sm text-red-600 mt-1">
+              Password must be at least 8 characters long and include a letter, a number, and a special character.
+            </p>
+          )}
 
-      <a href='/register'>
-        <p className="mt-5 text-center text-sm underline font-medium text-gray-400 hover:text-sky-700 cursor-pointer">
-            Don't Have an Account? Register Here --&gt;</p>
-      </a>
-    </form>
-  )}
+          {/* Term Aknowledge */}
+          <div className="mt-5 flex items-center space-x-4">
+              <input
+                type="checkbox"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+              />
+              <label className="text-sm">I acknowledge and accept the {' '} 
+                <span 
+                  onClick={()=>setShowTermsModal(true)}
+                  className="text-sky-600 font-medium underline underline-offset-1 cursor-pointer">
+                  terms</span>
+              </label>
+          </div>
 
-  {showTermsModal && (
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-xl max-w-md space-y-4 shadow-lg">
-        <h3 className="text-lg font-bold">Terms and Conditions</h3>
-        <div className="text-sm max-h-64 overflow-y-auto text-gray-700">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <p className="mt-2">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur.
-          </p>
-        </div>
-        <div className="flex justify-end space-x-2">
+          {/* Submit */}
           <button
-            onClick={() => setShowTermsModal(false)}
-            className="px-4 py-2 text-gray-600 hover:text-black"
+            type="submit"
+            disabled={!termsAccepted}
+            className={`w-full text-white font-semibold py-2 px-4 mt-6 rounded-lg transition-colors duration-300
+              ${termsAccepted?`bg-blue-600 hover:bg-blue-700`:`bg-gray-300`}`}
           >
-            Cancel
+            Sign In
           </button>
-          <button
-            onClick={handleAcceptTerms}
-            className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
-          >
-            Accept
-          </button>
-        </div>
-      </div>
+
+          <a href='/register'>
+            <p className="mt-5 text-center text-sm underline font-medium text-gray-400 hover:text-sky-700 cursor-pointer">
+                Don't Have an Account? Register Here --&gt;</p>
+          </a>
+        </form>
+      )}
     </div>
-  )}
-  </>
+
+    {showTermsModal && (
+      <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+        <div className="bg-white p-6 rounded-xl max-w-md space-y-4 shadow-lg">
+          <h3 className="text-lg font-bold">Terms and Conditions</h3>
+          <div className="text-sm max-h-64 overflow-y-auto text-gray-700">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat.
+
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat.
+
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat.
+
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p className="mt-2">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur.
+            </p>
+          </div>
+          <div className="flex justify-end space-x-2">
+            <button
+              onClick={() => setShowTermsModal(false)}
+              className="px-4 py-2 text-gray-600 hover:text-black"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleAcceptTerms}
+              className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
+            >
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+  </section>
   );
 };
 
