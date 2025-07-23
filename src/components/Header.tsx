@@ -20,7 +20,7 @@ const Header: React.FC= () => {
           <div className="flex items-center space-x-2 hover:cursor-pointer"
               onClick={()=>window.location.href='/'}>
             <Home className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">Union Homes</span>
+            <span className="text-2xl font-bold text-gray-900">House Map</span>
           </div>
 
           {/* Desktop Navigation */}

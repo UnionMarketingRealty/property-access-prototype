@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <Home className="h-8 w-8 text-blue-400" />
-              <span className="text-2xl font-bold">Union Homes</span>
+              <span className="text-2xl font-bold">House Map</span>
             </div>
             <p className="text-gray-400 mb-2">
               Your trusted partner in Greater Toronto Area real estate. We connect buyers, sellers, and renters with their ideal homes across the GTA.

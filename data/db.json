@@ -797,7 +797,7 @@
     {
       "id": "26",
       "title": "King West Luxury House #26",
-      "price": 8308,
+      "price": 8300,
       "priceType": "lease",
       "address": "404 Yonge Street",
       "city": "Markham",
@@ -827,7 +827,7 @@
     {
       "id": "27",
       "title": "Executive Townhome in Mississauga #27",
-      "price": 1387802,
+      "price": 1387800,
       "priceType": "sale",
       "address": "123 Bay Street",
       "city": "Scarborough",
@@ -946,6 +946,96 @@
       "coordinates": {
         "lat": 43.56152205279283,
         "lng": -79.55562363987671
+      }
+    },
+    {
+      "id": "31",
+      "title": "Executive Townhome GTA #31",
+      "price": 1484000,
+      "priceType": "sale",
+      "address": "104 Front Street",
+      "city": "Toronto Great Area",
+      "province": "ON",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "sqft": 1857,
+      "propertyType": "house",
+      "images": [
+        "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "description": "Stunning executive townhome in desirable Lakeview neighbourhood.",
+      "amenities": [
+        "Hardwood Throughout",
+        "Granite Countertops",
+        "1 Basement",
+        "Private Garage"
+      ],
+      "listingDate": "2024-12-11",
+      "featured": true,
+      "coordinates": {
+        "lat": 49.56152205279283,
+        "lng": 79.55562363987671
+      }
+    },
+    {
+      "id": "32",
+      "title": "Executive Townhome GTA #32",
+      "price": 2484000,
+      "priceType": "sale",
+      "address": "104 Youge Street",
+      "city": "Toronto Great Area",
+      "province": "ON",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "sqft": 1857,
+      "propertyType": "house",
+      "images": [
+        "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "description": "Stunning executive townhome in desirable Lakeview neighbourhood.",
+      "amenities": [
+        "Hardwood Throughout",
+        "Granite Countertops",
+        "1 Basement",
+        "Private Garage"
+      ],
+      "listingDate": "2024-12-11",
+      "featured": true,
+      "coordinates": {
+        "lat": 49.56152205279283,
+        "lng": 79.55562363987671
+      }
+    },
+    {
+      "id": "33",
+      "title": "Executive Townhome GTA #33",
+      "price": 2380000,
+      "priceType": "lease",
+      "address": "23 King Street",
+      "city": "Toronto Great Area",
+      "province": "ON",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "sqft": 1257,
+      "propertyType": "house",
+      "images": [
+        "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "description": "Stunning executive townhome in desirable Lakeview neighbourhood.",
+      "amenities": [
+        "Hardwood Throughout",
+        "Granite Countertops",
+        "1 Basement",
+        "Private Garage"
+      ],
+      "listingDate": "2024-12-11",
+      "featured": true,
+      "coordinates": {
+        "lat": 49.56152205279283,
+        "lng": 79.55562363987671
       }
     }
   ]
