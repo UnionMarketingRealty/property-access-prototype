@@ -31,7 +31,7 @@ const Home = () => {
       limit = 100;
     }
     //fetch
-    fetch(`http://localhost:8000/properties/?_limit=${limit}`)
+    fetch(`https://property-access-json-server.onrender.com/properties/?_limit=${limit}`)
     .then(res =>{
       return res.json();
     })
