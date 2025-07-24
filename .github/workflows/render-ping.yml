@@ -3,7 +3,7 @@ name: 10-min render ping
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # Runs daily at midnight UTC
+    - cron: "0,10,20,30,40,50 * * * *"  # Runs daily at midnight UTC
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
