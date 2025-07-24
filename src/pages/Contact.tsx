@@ -19,7 +19,7 @@ const Contact = () => {
   //fetch data from json-server users
   const [realtors,setRealtors] = useState<Realtor[]>();
   useEffect(()=>{
-    fetch(`http://localhost:8000/realtors`)
+    fetch(`https://property-access-json-server.onrender.com/realtors`)
     .then(res =>{
       return res.json();
     })
